@@ -9,6 +9,8 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatInputModule } from '@angular/material/input';
 import { MatBadgeModule } from '@angular/material/badge';
 
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+
 const MaterialComponents = [
   MatToolbarModule,
   MatButtonModule,
@@ -19,6 +21,7 @@ const MaterialComponents = [
   MatInputModule,
   MatNativeDateModule,
   MatBadgeModule,
+  NgbModule,
 ];
 
 @NgModule({

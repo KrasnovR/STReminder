@@ -1,13 +1,21 @@
 
-<div class="content">
-  <mat-form-field>
-  <input matInput placeholder="Название">
-  </mat-form-field>
+<form class="content" action="" #createForm="ngForm">
+  <div class="content-row">
+    <mat-form-field>
+      <input required minlength="3" matInput placeholder="Название" name="name" [(ngModel)]="name" #nameControl="ngModel">
+    </mat-form-field>
+  </div>
 
-<mat-form-field>
-    <input matInput [matDatepicker]="picker" placeholder="Выбери дату">
-    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-    <mat-datepicker #picker></mat-datepicker>
-  </mat-form-field>
-</div>
 
+  <div class="content-row">
+    <mat-form-field>
+      <input required minlength="8" matInput [matDatepicker]="picker" placeholder="Выбери дату" [(ngModel)]="date" name="date" #dateControl="ngModel">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+
+    <ngb-timepicker [(ngModel)]="time" required name="timepicker"></ngb-timepicker>
+  </div>
+
+  <button [disabled]="createForm.form.invalid" mat-flat-button color="primary" type="submit" >Создать</button>
+</form>

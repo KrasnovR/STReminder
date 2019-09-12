@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
+
 @Component({
   selector: 'app-create-form',
   templateUrl: './create-form.component.html',
@@ -9,6 +10,9 @@ export class CreateFormComponent implements OnInit {
 
   constructor() { }
 
+  time: object;
+  date: Date;
+  name: string;
   ngOnInit() {
   }
 
