@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ReminderService } from '../reminder.service';
 
 @Component({
   selector: 'app-tool-bar',
@@ -6,10 +7,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./tool-bar.component.css']
 })
 export class ToolBarComponent implements OnInit {
-
-  constructor() { }
+  itemsLength: number;
+  constructor(
+    private reminderService: ReminderService,
+  ) { }
 
   ngOnInit() {
+    this.itemsLength = this.reminderService.returnItems().length;
   }
 
 }

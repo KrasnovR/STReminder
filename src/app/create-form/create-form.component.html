@@ -1,1 +1,13 @@
-<p>create-form works!</p>
+
+<div class="content">
+  <mat-form-field>
+  <input matInput placeholder="Название">
+  </mat-form-field>
+
+<mat-form-field>
+    <input matInput [matDatepicker]="picker" placeholder="Выбери дату">
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+  </mat-form-field>
+</div>
+

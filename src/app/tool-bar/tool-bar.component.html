@@ -1,4 +1,4 @@
 <mat-toolbar class="tool-bar">
-    <a mat-button routerLink=".">Главная</a>
-    <a mat-button routerLink=".">Создать напоминание</a>
+    <a routerLink="/" mat-button routerLinkActive="active" matBadge="{{itemsLength}}" matBadgeSize='small' matBadgePosition="below before" matBadgeColor="primary">Главная</a>
+    <a routerLink="/create" mat-button routerLinkActive="active">Создать напоминание</a>
 </mat-toolbar>

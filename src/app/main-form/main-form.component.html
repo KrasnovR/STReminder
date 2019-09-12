@@ -1,17 +1,13 @@
-<div class="content">
-  <div class="remind-list">
-    <mat-selection-list #shoes>
-      <mat-list-option (click)="checkboxCheck(shoes.selectedOptions.selected.length)" *ngFor="let shoe of typesOfShoes">
-        {{shoe}}
-      </mat-list-option>
-    </mat-selection-list>
-  </div>
 
-  <div class="modal-info">
-    <span>Выбрано напоминаний: {{shoes.selectedOptions.selected.length}}</span>
-    <button mat-flat-button color="warn">Удалить</button>
-  </div>
+<div class="remind-list">
+  <mat-selection-list #shoes>
+    <mat-list-option (click)="checkboxCheck(shoes.selectedOptions.selected.length)" *ngFor="let shoe of typesOfShoes">
+      {{shoe}}
+    </mat-list-option>
+  </mat-selection-list>
 </div>
 
-
-
+<div class="modal-info">
+  <span>Выбрано напоминаний: {{shoes.selectedOptions.selected.length}}</span>
+  <button mat-flat-button color="warn">Удалить</button>
+</div>

@@ -1,13 +1,11 @@
 
-.content {
-  position: relative;
-}
-
 .modal-info {
   opacity: 0;
   pointer-events: none;
   position: absolute;
   display: flex;
+  right: 25px;
+  bottom: 25px;
   justify-content: space-between;
   align-items: center;
   padding: 9px 16px;
