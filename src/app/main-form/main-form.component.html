@@ -9,5 +9,8 @@
 
 <div class="modal-info">
   <span>Выбрано напоминаний: {{shoes.selectedOptions.selected.length}}</span>
+  <button mat-flat-button color="primary" [disabled]="!isShowUpdate">Обновить</button>
   <button mat-flat-button color="warn">Удалить</button>
 </div>
+
+<button (click)="testApi()">Погнали</button>

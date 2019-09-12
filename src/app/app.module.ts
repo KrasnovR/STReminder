@@ -5,6 +5,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 
 import { ReminderService } from './reminder.service';
+import { ApiService } from './api.service';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -29,7 +30,7 @@ import { CreateFormComponent } from './create-form/create-form.component';
     HttpClientModule,
     FormsModule,
   ],
-  providers: [ ReminderService ],
+  providers: [ ReminderService, ApiService ],
   bootstrap: [ AppComponent ]
 })
 export class AppModule { }

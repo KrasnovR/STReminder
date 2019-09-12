@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ReminderService } from '../reminder.service'
+import { ReminderService } from '../reminder.service';
+import { ApiService } from '../api.service';
 
 @Component({
   selector: 'app-main-form',
@@ -10,13 +11,15 @@ export class MainFormComponent implements OnInit {
 
   constructor(
     private reminderService: ReminderService,
+    private apiService: ApiService,
   ) { }
 
   checkBoxis: NodeListOf<HTMLElement>;
   modalBlock: NodeListOf<HTMLElement>;
 
   typesOfShoes: string[] = this.reminderService.returnItems();
-
+  remiderList: object[];
+  isShowUpdate = false;
   ngOnInit() {
   }
 
@@ -26,9 +29,10 @@ export class MainFormComponent implements OnInit {
     this.checkBoxis.forEach(elem => elem.style.display = 'none');
   }
 
-  showModalBlock() {
+  showModalBlock(shoesLength: number) {
     this.modalBlock[0].classList.add('show-modal');
     this.checkBoxis.forEach(elem => elem.style.display = 'inline-block');
+    this.isShowUpdate = !(shoesLength > 1);
   }
 
   hideModalBlock() {
@@ -37,6 +41,11 @@ export class MainFormComponent implements OnInit {
   }
 
   checkboxCheck(shoesLength: number) {
-    shoesLength ? this.showModalBlock() : this.hideModalBlock();
+    shoesLength ? this.showModalBlock(shoesLength) : this.hideModalBlock();
+  }
+
+  testApi() {
+    this.apiService.getRemindersList().subscribe((data: object[]) => this.remiderList = data);
+    console.log(this.remiderList);
   }
 }

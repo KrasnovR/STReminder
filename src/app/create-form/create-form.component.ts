@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ApiService } from '../api.service';
 
 
 @Component({
@@ -8,12 +9,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CreateFormComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private apiService: ApiService,
+  ) { }
 
   time: object;
   date: Date;
   name: string;
-  ngOnInit() {
-  }
 
+  ngOnInit() {
+
+  }
+  onSubmit() {
+    console.log(this.date);
+    console.log(this.time);
+    console.log(this.name);
+  }
 }
