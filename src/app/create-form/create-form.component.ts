@@ -2,6 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../api.service';
 import { NgbTimepickerConfig } from '@ng-bootstrap/ng-bootstrap';
 
+interface ItimePicker {
+  hour: number;
+  minute: number;
+  second: number;
+}
 
 @Component({
   selector: 'app-create-form',
@@ -10,6 +15,9 @@ import { NgbTimepickerConfig } from '@ng-bootstrap/ng-bootstrap';
 })
 export class CreateFormComponent implements OnInit {
 
+
+
+
   constructor(
     private apiService: ApiService,
     private config: NgbTimepickerConfig
@@ -17,7 +25,7 @@ export class CreateFormComponent implements OnInit {
     config.spinners = false;
   }
 
-  time: object;
+  time: ItimePicker;
   date: Date;
   name: string;
 
@@ -25,8 +33,8 @@ export class CreateFormComponent implements OnInit {
 
   }
   onSubmit() {
-    console.log(this.date);
-    console.log(this.time);
-    console.log(this.name);
+    const newDate = new Date(this.date.setHours(this.time.hour, this.time.minute));
+
+    this.apiService.setReminder(this.name, newDate.toISOString());
   }
 }

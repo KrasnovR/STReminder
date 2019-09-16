@@ -8,6 +8,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatInputModule } from '@angular/material/input';
 import { MatBadgeModule } from '@angular/material/badge';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
@@ -22,6 +23,7 @@ const MaterialComponents = [
   MatNativeDateModule,
   MatBadgeModule,
   NgbModule,
+  MatProgressBarModule,
 ];
 
 @NgModule({

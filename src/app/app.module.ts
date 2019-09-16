@@ -1,10 +1,11 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 
 import { ApiService } from './api.service';
+import { LoaderService } from './loader.service';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -13,6 +14,8 @@ import { ToolBarComponent } from './tool-bar/tool-bar.component';
 import { MainFormComponent } from './main-form/main-form.component';
 import { CreateFormComponent } from './create-form/create-form.component';
 import { ModalInfoComponent } from './modal-info/modal-info.component';
+import { LoaderComponent } from './loader/loader.component';
+import { LoaderInterceptor } from './interceptors/loader.interceptors';
 
 
 @NgModule({
@@ -22,6 +25,7 @@ import { ModalInfoComponent } from './modal-info/modal-info.component';
     MainFormComponent,
     CreateFormComponent,
     ModalInfoComponent,
+    LoaderComponent,
   ],
   imports: [
     BrowserModule,
@@ -31,7 +35,7 @@ import { ModalInfoComponent } from './modal-info/modal-info.component';
     HttpClientModule,
     FormsModule,
   ],
-  providers: [ ApiService ],
+  providers: [ ApiService, LoaderService, { provide: HTTP_INTERCEPTORS, useClass: LoaderInterceptor, multi: true } ],
   bootstrap: [ AppComponent ]
 })
 export class AppModule { }

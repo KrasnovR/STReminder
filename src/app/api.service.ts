@@ -17,15 +17,15 @@ export class ApiService {
 
 
   getRemindersList() {
-    return this.httpClient.get(`${this.LINK}/api/reminders?userId=${this.USER_ID}1`);
+    return this.httpClient.get(`${this.LINK}/api/reminders?userId=${this.USER_ID}`);
   }
 
   setReminder(name: string, dateStr: string) {
-    return this.httpClient.post(`${this.LINK}/api/reminders?userId=${this.USER_ID}`, { note: name, date: dateStr });
+    return this.httpClient.post(`${this.LINK}/api/reminders?userId=${this.USER_ID}`, { "note": name, "date": dateStr });
   }
 
   updateReminder(reminderId: string, name: string, dateStr: string) {
-    return this.httpClient.put(`${this.LINK}/api/reminders/${reminderId}?userId=${this.USER_ID}`, { note: name, date: dateStr });
+    return this.httpClient.put(`${this.LINK}/api/reminders/${reminderId}?userId=${this.USER_ID}`, { "note": name, "date": dateStr });
   }
 
   deleteReminder(reminderId: string) {
