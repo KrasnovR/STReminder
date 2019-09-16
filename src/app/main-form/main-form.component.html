@@ -1,4 +1,4 @@
-
+<app-modal-info *ngIf="isModalInfoVisible" [modalText]="modalText" [modalType]="modalType" (isConfirmed)="closeModal($event)"></app-modal-info>
 <div class="remind-list">
   <mat-selection-list #shoes>
     <mat-list-option (click)="checkboxCheck(shoes.selectedOptions.selected.length)" *ngFor="let shoe of typesOfShoes">
@@ -9,8 +9,8 @@
 
 <div class="modal-info">
   <span>Выбрано напоминаний: {{shoes.selectedOptions.selected.length}}</span>
-  <button mat-flat-button color="primary" [disabled]="!isShowUpdate">Обновить</button>
+  <button mat-flat-button color="primary" [disabled]="showUpdate">Обновить</button>
   <button mat-flat-button color="warn">Удалить</button>
 </div>
 
-<button (click)="testApi()">Погнали</button>
+<button (click)="getFormatedReminders()">Погнали</button>

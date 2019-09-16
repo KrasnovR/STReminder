@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { ReminderService } from '../reminder.service';
 import { ApiService } from '../api.service';
 
 @Component({
@@ -10,16 +9,24 @@ import { ApiService } from '../api.service';
 export class MainFormComponent implements OnInit {
 
   constructor(
-    private reminderService: ReminderService,
     private apiService: ApiService,
-  ) { }
+  ) {
+  }
 
   checkBoxis: NodeListOf<HTMLElement>;
   modalBlock: NodeListOf<HTMLElement>;
-
-  typesOfShoes: string[] = this.reminderService.returnItems();
+  typesOfShoes: string[];
   remiderList: object[];
-  isShowUpdate = false;
+  showUpdate = false;
+  modalText: string;
+  modalType: string;
+
+  isModalInfoVisible = false;
+
+  public closeModal(isConfirmed: boolean) {
+    this.isModalInfoVisible = false;
+  }
+
   ngOnInit() {
   }
 
@@ -32,7 +39,7 @@ export class MainFormComponent implements OnInit {
   showModalBlock(shoesLength: number) {
     this.modalBlock[0].classList.add('show-modal');
     this.checkBoxis.forEach(elem => elem.style.display = 'inline-block');
-    this.isShowUpdate = !(shoesLength > 1);
+    this.showUpdate = shoesLength !== 1;
   }
 
   hideModalBlock() {
@@ -44,8 +51,28 @@ export class MainFormComponent implements OnInit {
     shoesLength ? this.showModalBlock(shoesLength) : this.hideModalBlock();
   }
 
-  testApi() {
-    this.apiService.getRemindersList().subscribe((data: object[]) => this.remiderList = data);
-    console.log(this.remiderList);
+  getFormatedReminders() {
+    this.apiService.getRemindersList().subscribe(
+      (data: object[]) => {
+        this.remiderList = data;
+      },
+      (error) => {
+        this.isModalInfoVisible = true;
+        this.modalText = error.status;
+        this.modalType = 'error';
+      }
+    );
   }
+
+  formateDateTime(dateTimeStr: string): object {
+    const date: Date = new Date(dateTimeStr);
+    const formateDate = `${date.getUTCDate()}.${date.getUTCMonth()}.${date.getUTCFullYear()}`;
+    const formateTime = `${date.getUTCHours()}:${date.getUTCMinutes()}`;
+
+    return {
+      date: formateDate,
+      time: formateTime,
+    };
+  }
+
 }

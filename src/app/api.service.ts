@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { error } from '@angular/compiler/src/util';
 
 @Injectable({
   providedIn: 'root'
@@ -14,19 +15,20 @@ export class ApiService {
   LINK = 'https://europe-west1-st-testcase.cloudfunctions.net';
   USER_ID = 'ZWPnKOK4XDYiYh9wEX3v';
 
+
   getRemindersList() {
-    return this.httpClient.get(`${this.LINK}/api/reminders?userId=${this.USER_ID}`);
+    return this.httpClient.get(`${this.LINK}/api/reminders?userId=${this.USER_ID}1`);
   }
 
-  setReminder(name: string, date: Date) {
-    this.httpClient.post(`${this.LINK}/api/reminders?userId=${this.USER_ID}`, { note: name, date: date.toString() });
+  setReminder(name: string, dateStr: string) {
+    return this.httpClient.post(`${this.LINK}/api/reminders?userId=${this.USER_ID}`, { note: name, date: dateStr });
   }
 
-  updateReminder(reminderId: string, name: string, date: Date) {
-    this.httpClient.put(`${this.LINK}/api/reminders/${reminderId}?userId=${this.USER_ID}`, { note: name, date: date.toString() });
+  updateReminder(reminderId: string, name: string, dateStr: string) {
+    return this.httpClient.put(`${this.LINK}/api/reminders/${reminderId}?userId=${this.USER_ID}`, { note: name, date: dateStr });
   }
 
   deleteReminder(reminderId: string) {
-    this.httpClient.delete(`${this.LINK}/api/reminders/${reminderId}?userId=${this.USER_ID}`);
+    return this.httpClient.delete(`${this.LINK}/api/reminders/${reminderId}?userId=${this.USER_ID}`);
   }
 }

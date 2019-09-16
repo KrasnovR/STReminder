@@ -1,0 +1,24 @@
+<div class="modal">
+  <div class="modal-block">
+
+    <div *ngIf="modalType === 'create'" class="modal-block__title">
+      <p>Напоминание</p>
+      <p><strong>{{modalText}}</strong></p>
+      <p>создано</p>
+    </div>
+
+    <div *ngIf="modalType === 'error'" class="modal-block__title">
+      <p>Ошибка: {{modalText}}</p>
+    </div>
+
+    <div *ngIf="modalType === 'delete'" class="modal-block__title">
+      <p>Напоминание удалено.</p>
+    </div>
+
+    <div *ngIf=" modalType === 'update'" class="modal-block__title">
+      <p>Напоминание обновлено.</p>
+    </div>
+
+    <button (click)="closeModal()" mat-stroked-button color="primary" class="modal-block__button">ОК</button>
+  </div>
+</div>

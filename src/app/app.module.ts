@@ -4,7 +4,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 
-import { ReminderService } from './reminder.service';
 import { ApiService } from './api.service';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -13,6 +12,7 @@ import { MaterialModule } from './material/material.module';
 import { ToolBarComponent } from './tool-bar/tool-bar.component';
 import { MainFormComponent } from './main-form/main-form.component';
 import { CreateFormComponent } from './create-form/create-form.component';
+import { ModalInfoComponent } from './modal-info/modal-info.component';
 
 
 @NgModule({
@@ -21,6 +21,7 @@ import { CreateFormComponent } from './create-form/create-form.component';
     ToolBarComponent,
     MainFormComponent,
     CreateFormComponent,
+    ModalInfoComponent,
   ],
   imports: [
     BrowserModule,
@@ -30,7 +31,7 @@ import { CreateFormComponent } from './create-form/create-form.component';
     HttpClientModule,
     FormsModule,
   ],
-  providers: [ ReminderService, ApiService ],
+  providers: [ ApiService ],
   bootstrap: [ AppComponent ]
 })
 export class AppModule { }
