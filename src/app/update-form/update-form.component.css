@@ -1,0 +1,9 @@
+.content {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+}
+
+.content-row {
+  margin-bottom: 10px;
+}

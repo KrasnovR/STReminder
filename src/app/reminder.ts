@@ -10,3 +10,8 @@ export interface IFormatedReminder {
   id: string;
   note: string;
 }
+
+export interface IApiState {
+  status: string;
+  code: string;
+}

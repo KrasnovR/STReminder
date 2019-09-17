@@ -1,21 +1,22 @@
 <app-modal-info *ngIf="isModalInfoVisible" [modalText]="modalText" [modalType]="modalType" (isConfirmed)="closeModal($event)"></app-modal-info>
-<div class="remind-list">
-  <mat-selection-list #reminders>
-    <mat-list-option (click)="checkboxCheck(reminders.selectedOptions.selected.length)" *ngFor="let reminder of reminderList">
-      <div class="remind-list__row">
+<div class="content">
+  <div class="remind-list">
+    <mat-selection-list #reminders [(ngModel)]="selectedReminders">
+      <mat-list-option (click)="checkboxCheck(reminders.selectedOptions.selected.length)" [value]="reminder"
+        *ngFor="let reminder of reminderList">
+        <div class="remind-list__row">
           <span><strong>{{reminder.note}}</strong></span>
           <div class="reminder-list__row-dateTime">
-              <span>Дата: {{reminder.date}}</span>
-              <span>Время: {{reminder.time}}</span>
+            <span>Дата: {{reminder.date}}</span>
+            <span>Время: {{reminder.time}}</span>
           </div>
-      </div>
-    </mat-list-option>
-  </mat-selection-list>
+        </div>
+      </mat-list-option>
+    </mat-selection-list>
+  </div>
+  <div class="modal-info">
+    <span>Выбрано напоминаний: {{reminders.selectedOptions.selected.length}}</span>
+    <button mat-flat-button color="primary" (click)="updateReminder()" [disabled]="showUpdate">Обновить</button>
+    <button mat-flat-button color="warn" (click)="deleteReminder()">Удалить</button>
+  </div>
 </div>
-<div class="modal-info">
-  <span>Выбрано напоминаний: {{reminders.selectedOptions.selected.length}}</span>
-  <button mat-flat-button color="primary" [disabled]="showUpdate">Обновить</button>
-  <button mat-flat-button color="warn">Удалить</button>
-</div>
-
-<button (click)="getReminders()">Погнали</button>

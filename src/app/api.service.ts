@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { error } from '@angular/compiler/src/util';
+import { IFormatedReminder } from './reminder';
+
 
 @Injectable({
   providedIn: 'root'
 })
-
 export class ApiService {
 
   constructor(
@@ -14,7 +14,7 @@ export class ApiService {
 
   LINK = 'https://europe-west1-st-testcase.cloudfunctions.net';
   USER_ID = 'ZWPnKOK4XDYiYh9wEX3v';
-
+  reminderList: IFormatedReminder[] = [];
 
   getRemindersList() {
     return this.httpClient.get(`${this.LINK}/api/reminders?userId=${this.USER_ID}`);

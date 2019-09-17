@@ -6,6 +6,7 @@ import { FormsModule } from '@angular/forms';
 
 import { ApiService } from './api.service';
 import { LoaderService } from './loader.service';
+import { UpdateService } from './update.service';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -16,6 +17,7 @@ import { CreateFormComponent } from './create-form/create-form.component';
 import { ModalInfoComponent } from './modal-info/modal-info.component';
 import { LoaderComponent } from './loader/loader.component';
 import { LoaderInterceptor } from './interceptors/loader.interceptors';
+import { UpdateFormComponent } from './update-form/update-form.component';
 
 
 @NgModule({
@@ -26,6 +28,7 @@ import { LoaderInterceptor } from './interceptors/loader.interceptors';
     CreateFormComponent,
     ModalInfoComponent,
     LoaderComponent,
+    UpdateFormComponent,
   ],
   imports: [
     BrowserModule,
@@ -35,7 +38,7 @@ import { LoaderInterceptor } from './interceptors/loader.interceptors';
     HttpClientModule,
     FormsModule,
   ],
-  providers: [ ApiService, LoaderService, { provide: HTTP_INTERCEPTORS, useClass: LoaderInterceptor, multi: true } ],
+  providers: [ UpdateService, ApiService, LoaderService, { provide: HTTP_INTERCEPTORS, useClass: LoaderInterceptor, multi: true } ],
   bootstrap: [ AppComponent ]
 })
 export class AppModule { }

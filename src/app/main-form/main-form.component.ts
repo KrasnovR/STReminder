@@ -1,7 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../api.service';
+import { LoaderService } from '../loader.service';
+import { UpdateService } from '../update.service';
+import { Router } from '@angular/router';
 
 import { IReminder, IFormatedReminder} from '../reminder';
+import { Subject } from 'rxjs';
+
 
 @Component({
   selector: 'app-main-form',
@@ -10,25 +15,32 @@ import { IReminder, IFormatedReminder} from '../reminder';
 })
 export class MainFormComponent implements OnInit {
 
-  constructor(
-    private apiService: ApiService,
-  ) {
+  set data(value: IFormatedReminder) {
+    this.updateService.serviceData = value;
   }
 
+  constructor(
+    private apiService: ApiService,
+    private loaderService: LoaderService,
+    private updateService: UpdateService,
+    private router: Router
+  ) {
+  }
 
   checkBoxes: NodeListOf<HTMLElement>;
   modalBlock: NodeListOf<HTMLElement>;
   reminderList: IFormatedReminder[];
+  selectedReminders: IFormatedReminder[];
   showUpdate = false;
   modalText: string;
   modalType: string;
 
-  isModalInfoVisible = false;
+  isModalInfoVisible: boolean;
 
-  showModal(type: string, text?: string) {
-    this.isModalInfoVisible = true;
+  showModal(type: string, text: string) {
     this.modalText = text;
     this.modalType = type;
+    this.isModalInfoVisible = true;
   }
 
   public closeModal(isConfirmed: boolean) {
@@ -36,6 +48,7 @@ export class MainFormComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.getReminders();
   }
 
   setCheckBoxes() {
@@ -61,23 +74,9 @@ export class MainFormComponent implements OnInit {
     this.checkBoxes.forEach(elem => elem.style.opacity = '0');
   }
 
-  checkboxCheck(shoesLength: number) {
-    shoesLength ? this.showModalBlock(shoesLength) : this.hideModalBlock();
-  }
 
-  getReminders() {
-    this.apiService.getRemindersList().subscribe(
-      (data: IReminder[]) => {
-        this.reminderList = this.showRemindersList(data);
-      },
-      (error) => {
-        this.showModal('error', error.status);
-      }
-    );
-  }
-
-  showRemindersList(reminderArray: IReminder[]): IFormatedReminder[] {
-    return reminderArray.map(reminder => {
+  setRemindersList(reminderArray: IReminder[]) {
+    this.reminderList = reminderArray.map(reminder => {
       const result = this.formateDateTime(reminder.date);
       return {
         date: result.date,
@@ -98,4 +97,33 @@ export class MainFormComponent implements OnInit {
       time: formateTime,
     };
   }
+
+  checkboxCheck(shoesLength: number) {
+    shoesLength ? this.showModalBlock(shoesLength) : this.hideModalBlock();
+  }
+
+  getReminders() {
+    this.apiService.getRemindersList().subscribe(
+      (data: IReminder[]) => {
+        this.setRemindersList(data);
+      },
+      error => {
+        this.showModal('error', error.status);
+      }
+    );
+  }
+
+  updateReminder() {
+    this.data = this.selectedReminders[0];
+    this.router.navigate(['/update']);
+  }
+
+  deleteReminder() {
+    this.selectedReminders.forEach(reminder => {
+      this.apiService.deleteReminder(reminder.id).subscribe();
+      this.reminderList = this.reminderList.filter(value => value.id !== reminder.id);
+    });
+    this.hideModalBlock();
+  }
+
 }

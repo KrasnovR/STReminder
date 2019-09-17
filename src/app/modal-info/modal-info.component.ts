@@ -11,9 +11,12 @@ export class ModalInfoComponent implements OnInit {
   @Input() modalText: string;
   @Output() isConfirmed: EventEmitter<boolean> = new EventEmitter<boolean>();
 
+  isShowModal: boolean;
+
   private closeModal() {
     this.isConfirmed.emit(false);
   }
+
   constructor() {}
 
   ngOnInit() {
