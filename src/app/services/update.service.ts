@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { IFormatedReminder } from './reminder';
+import { IFormatedReminder } from '../reminder';
 
 @Injectable({
   providedIn: 'root'

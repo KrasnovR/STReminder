@@ -1,12 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { ApiService } from '../api.service';
-import { LoaderService } from '../loader.service';
-import { UpdateService } from '../update.service';
+import { ApiService } from '../services/api.service';
+import { LoaderService } from '../services/loader.service';
+import { UpdateService } from '../services/update.service';
 import { Router } from '@angular/router';
 
 import { IReminder, IFormatedReminder} from '../reminder';
-import { Subject } from 'rxjs';
-
 
 @Component({
   selector: 'app-main-form',

@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { ApiService } from '../api.service';
-import { UpdateService } from '../update.service';
+import { ApiService } from '../services/api.service';
+import { UpdateService } from '../services/update.service';
 import { NgbTimepickerConfig } from '@ng-bootstrap/ng-bootstrap';
 import { IFormatedReminder } from '../reminder';
 import { Router } from '@angular/router';

@@ -4,9 +4,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 
-import { ApiService } from './api.service';
-import { LoaderService } from './loader.service';
-import { UpdateService } from './update.service';
+import { ApiService } from './services/api.service';
+import { LoaderService } from './services/loader.service';
+import { UpdateService } from './services/update.service';
+import { TimetrackerService } from './services/timetracker.service';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -18,6 +19,7 @@ import { ModalInfoComponent } from './modal-info/modal-info.component';
 import { LoaderComponent } from './loader/loader.component';
 import { LoaderInterceptor } from './interceptors/loader.interceptors';
 import { UpdateFormComponent } from './update-form/update-form.component';
+
 
 
 @NgModule({
@@ -38,7 +40,9 @@ import { UpdateFormComponent } from './update-form/update-form.component';
     HttpClientModule,
     FormsModule,
   ],
-  providers: [ UpdateService, ApiService, LoaderService, { provide: HTTP_INTERCEPTORS, useClass: LoaderInterceptor, multi: true } ],
+  providers: [ TimetrackerService, UpdateService, ApiService, LoaderService,
+              { provide: HTTP_INTERCEPTORS, useClass: LoaderInterceptor, multi: true }
+            ],
   bootstrap: [ AppComponent ]
 })
 export class AppModule { }
