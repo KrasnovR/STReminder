@@ -1,11 +1,18 @@
 <app-modal-info *ngIf="isModalInfoVisible" [modalText]="modalText" [modalType]="modalType" (isConfirmed)="closeModal($event)"></app-modal-info>
 <div class="content">
   <div class="remind-list">
+    <div *ngIf="isListEmpty" class="reminder-list__info">
+      В данный момент список напоминаний пуст.
+    </div>
     <mat-selection-list #reminders [(ngModel)]="selectedReminders">
-      <mat-list-option (click)="checkboxCheck(reminders.selectedOptions.selected.length)" [value]="reminder"
-        *ngFor="let reminder of reminderList">
+      <mat-list-option color="primary" (click)="checkboxCheck(reminders.selectedOptions.selected.length)"
+        [value]="reminder" *ngFor="let reminder of reminderList">
         <div class="remind-list__row">
-          <span><strong>{{reminder.note}}</strong></span>
+          <div [ngStyle]="{'background': reminder.status} " class="reminder-list__row-status"></div>
+          <div class="reminder-list__row-title">
+            <strong>{{reminder.note}}</strong>
+          </div>
+
           <div class="reminder-list__row-dateTime">
             <span>Дата: {{reminder.date}}</span>
             <span>Время: {{reminder.time}}</span>

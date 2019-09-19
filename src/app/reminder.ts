@@ -9,6 +9,7 @@ export interface IFormatedReminder {
   time: string;
   id: string;
   note: string;
+  status: string;
 }
 
 export interface IApiState {

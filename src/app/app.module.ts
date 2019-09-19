@@ -19,6 +19,7 @@ import { ModalInfoComponent } from './modal-info/modal-info.component';
 import { LoaderComponent } from './loader/loader.component';
 import { LoaderInterceptor } from './interceptors/loader.interceptors';
 import { UpdateFormComponent } from './update-form/update-form.component';
+import { ModalReminderComponent } from './modal-reminder/modal-reminder.component';
 
 
 
@@ -31,6 +32,7 @@ import { UpdateFormComponent } from './update-form/update-form.component';
     ModalInfoComponent,
     LoaderComponent,
     UpdateFormComponent,
+    ModalReminderComponent,
   ],
   imports: [
     BrowserModule,

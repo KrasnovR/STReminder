@@ -2,9 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../services/api.service';
 import { LoaderService } from '../services/loader.service';
 import { UpdateService } from '../services/update.service';
+import { TimetrackerService } from '../services/timetracker.service';
 import { Router } from '@angular/router';
 
-import { IReminder, IFormatedReminder} from '../reminder';
+import { IReminder, IFormatedReminder } from '../reminder';
 
 @Component({
   selector: 'app-main-form',
@@ -17,23 +18,29 @@ export class MainFormComponent implements OnInit {
     this.updateService.serviceData = value;
   }
 
+  set reminderTrackList(value: IFormatedReminder[]) {
+    this.timetrackerService.reminderList = value;
+  }
+
   constructor(
     private apiService: ApiService,
     private loaderService: LoaderService,
     private updateService: UpdateService,
+    private timetrackerService: TimetrackerService,
     private router: Router
   ) {
   }
 
   checkBoxes: NodeListOf<HTMLElement>;
   modalBlock: NodeListOf<HTMLElement>;
-  reminderList: IFormatedReminder[];
+  reminderList: IFormatedReminder[] = [];
   selectedReminders: IFormatedReminder[];
   showUpdate = false;
   modalText: string;
   modalType: string;
 
   isModalInfoVisible: boolean;
+  isListEmpty: boolean;
 
   showModal(type: string, text: string) {
     this.modalText = text;
@@ -74,15 +81,44 @@ export class MainFormComponent implements OnInit {
 
 
   setRemindersList(reminderArray: IReminder[]) {
-    this.reminderList = reminderArray.map(reminder => {
-      const result = this.formateDateTime(reminder.date);
-      return {
-        date: result.date,
-        time: result.time,
-        id: reminder.id,
-        note: reminder.note,
-      };
-    });
+    if (reminderArray.length) {
+      this.reminderList = reminderArray.map(reminder => {
+        const result = this.formateDateTime(reminder.date);
+        const status = this.getDateTimeStatus(reminder.date);
+
+        return {
+          date: result.date,
+          time: result.time,
+          id: reminder.id,
+          note: reminder.note,
+          status: status,
+        };
+      });
+
+      this.setReminderTrackList(this.reminderList);
+    } else {
+      this.isListEmpty = true;
+    }
+  }
+
+  setReminderTrackList(reminderArray: IFormatedReminder[]) {
+    this.reminderTrackList = reminderArray.filter(reminder => reminder.status === 'green');
+
+    if (this.timetrackerService.intervalId === undefined) {
+      this.timetrackerService.startTracking();
+    }
+  }
+
+  getDateTimeStatus(dateTimeStr: string) {
+    const DateTimeNow = new Date();
+    const dateTimeReminder = new Date(dateTimeStr);
+    let result = 'green';
+
+    if ((DateTimeNow.getTime() - dateTimeReminder.getTime()) > 0) {
+      result = 'red';
+    }
+
+    return result;
   }
 
   formateDateTime(dateTimeStr: string) {
@@ -107,7 +143,7 @@ export class MainFormComponent implements OnInit {
       },
       error => {
         this.showModal('error', error.status);
-      }
+      },
     );
   }
 

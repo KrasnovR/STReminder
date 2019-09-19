@@ -43,7 +43,6 @@ export class UpdateFormComponent implements OnInit {
 
   ngOnInit() {
     this.reminderInfo = this.selectedReminder;
-    console.log(this.reminderInfo);
     this.setReminderInfo();
   }
 
@@ -54,14 +53,14 @@ export class UpdateFormComponent implements OnInit {
 
   setReminderInfo() {
     const time: string = this.reminderInfo.time;
-
+    const parts: string[] = this.reminderInfo.date.split('.');
     this.name = this.reminderInfo.note;
     this.time = {
       hour: Number(time.slice(0, 2)),
       minute: Number(time.slice(3, 5)),
       second: 0
     };
-    this.date = new Date(this.reminderInfo.date);
+    this.date = new Date(`${parts[1]}.${parts[0]}.${parts[2]}`);
   }
 
   showModal(type: string, text?: string) {

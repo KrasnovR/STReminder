@@ -26,7 +26,23 @@
   align-items: center;
 }
 
+.reminder-list__info {
+  margin-top: 20px;
+  text-align: center;
+}
+
 .reminder-list__row-dateTime {
   display: flex;
   flex-direction: column;
+}
+
+.reminder-list__row-title {
+  flex-grow: 1;
+}
+
+.reminder-list__row-status {
+    width: 13px;
+    height: 13px;
+    margin-right: 13px;
+    border-radius: 50%;
 }
