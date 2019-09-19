@@ -13,7 +13,7 @@ export class ModalInfoComponent implements OnInit {
 
   isShowModal: boolean;
 
-  private closeModal() {
+  closeModal() {
     this.isConfirmed.emit(false);
   }
 
